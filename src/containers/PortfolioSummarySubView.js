@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {PieChart, Pie, Cell} from '/home/ubuntu/workspace/my-app/node_modules/recharts';
+import {PieChart, Pie, Cell} from 'recharts';
 
 
 class PortfolioSummarySubView extends Component {

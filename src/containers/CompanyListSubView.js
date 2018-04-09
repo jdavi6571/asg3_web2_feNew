@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import '/home/ubuntu/workspace/my-app/src/App.css';
+import '../App.css';
 
 class CompanyListSubView extends Component {
 constructor(props){

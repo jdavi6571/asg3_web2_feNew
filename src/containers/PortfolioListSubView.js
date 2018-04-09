@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import BreadCrumb from '../components/BreadCrumb.js';
-import '/home/ubuntu/workspace/my-app/src/App.css';
+import '../App.css';
 
 class PortfolioListSubView extends Component {
 constructor(props){

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'; // eslint-disable-next-line 
 import CompanyListItem from '../containers/CompanyListItem.js';
 import axios from 'axios';
-import '/home/ubuntu/workspace/my-app/src/App.css';
+import '../App.css';
 import BreadCrumb from '../components/BreadCrumb.js';
 
 class BrowseCompanies extends Component {
