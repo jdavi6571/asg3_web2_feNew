@@ -9,7 +9,8 @@ class BrowsePortfolio extends Component {
 constructor(props) {
     super(props);
       this.state = {
-        id: this.props.match.params.id,
+        //id: this.props.match.params.id,
+        id:70,
         changeTab: "true",
         user: [],
         userPortfolio: [],
@@ -35,7 +36,7 @@ componentWillMount() {
     
     
 componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/users/" + this.state.id)
+    axios.get("https://jsonplaceholder.typicode.com/users/1")// + this.state.id)
         .then(response => {
         this.setState({
             user: response.data,
@@ -44,7 +45,7 @@ componentDidMount() {
             geo: response.data.address.geo }); })
         .catch(function (error) { alert('Error with api call ... error=' + error); });
         
-    axios.get("/stocks.json")
+    axios.get("../stocks.json")
         .then(response => { this.setState({ stocks: response.data }); })
         .catch(function (error) { alert('Error with api call ... error=' + error); }); }
   

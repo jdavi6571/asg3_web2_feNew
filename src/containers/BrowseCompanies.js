@@ -4,6 +4,7 @@ import axios from 'axios';
 import '../App.css';
 import BreadCrumb from '../components/BreadCrumb.js';
 
+
 class BrowseCompanies extends Component {
  constructor(props) {
    super(props);

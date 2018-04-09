@@ -1,9 +1,9 @@
 import React from 'react';
-
+import {Link} from 'react-router-dom';
 const ListItem = function (props) {
   return (
     <li>
-    <a href={props.path}>{props.caption}</a>
+    <a><Link to={props.path}>{props.caption}</Link></a>
     </li>
   );
 }
