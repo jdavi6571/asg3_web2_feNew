@@ -1,0 +1,90 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+
+article#containerBox {
+  width:15em;
+}
+
+
+.table td, .table th {
+    border: 1px solid hsl(0, 0%, 95%);
+    border-width: 0 0 1px;
+    padding: .5em .75em;
+    vertical-align: top;
+}
+
+img#stockImage{
+     height: 5em;
+    max-width: 5em;
+}
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+img.imageEdit {
+    height: 480px;
+    max-width: 1200px;
+    position: relative;
+    bottom: 24em;
+    
+}
+a.panel-block {
+      border-color: white;
+      
+}
+
+/*css from: https://dansup.github.io/bulma-templates/templates/login.html*/
+.hero.is-success {
+  background: #F2F6FA;
+}
+.hero .nav, .hero.is-success .nav {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+.box {
+  margin-top: 5rem;
+}
+.avatar {
+  margin-top: -70px;
+  padding-bottom: 20px;
+}
+.avatar img {
+  padding: 5px;
+  background: #fff;
+  border-radius: 50%;
+  -webkit-box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+  box-shadow: 0 2px 3px rgba(10,10,10,.1), 0 0 0 1px rgba(10,10,10,.1);
+}
+input {
+  font-weight: 300;
+}
+p {
+  font-weight: 700;
+}
+p.subtitle {
+  padding-top: 1rem;
+}
+/*-------------------------------------------------------------------------*/

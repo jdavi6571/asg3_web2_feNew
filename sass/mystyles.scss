@@ -1,0 +1,58 @@
+// 1. Import the initial variables
+@import "../node_modules/bulma/sass/utilities/initial-variables";
+@import "../node_modules/bulma/sass/utilities/functions";
+@import "../node_modules/bulma/sass/utilities/derived-variables.sass";
+@import "../node_modules/bulma/bulma";
+
+// Add a serif family
+$family-serif: "Merriweather", "Georgia", serif;
+
+// Use the new serif family
+$family-primary: $family-serif;
+
+// Setup your Custom Colors
+$blush: #EEB6B7;
+$blush-invert: findColorInvert($blush);
+$lavender: #6C64BB;
+$lavender-invert: findColorInvert($lavender);
+$dusty-rose: #B6A19E;
+$dusty-rose-invert: findColorInvert($dusty-rose);
+$smoke: #6E7376;
+$smoke-invert: findColorInvert($smoke);
+$cotton: #99CED4;
+$cotton-invert: findColorInvert($cotton);
+$powder-blue: #4A8DAC;
+$powder-blue-invert: findColorInvert($powder-blue);
+$leaf: #66AB8C;
+$leaf-invert: findColorInvert($leaf);
+$sunshine: #FBA100;
+$sunshine-invert: findColorInvert($sunshine);
+$crimson-sky: #CF6766;
+$crimson-sky-invert: findColorInvert($crimson-sky);
+$indigo: #30415D;
+$indigo-invert: findColorInvert($indigo);
+$aqua: #6BBAA7;
+$aqua-invert: findColorInvert($aqua);
+
+// 5. Add new color variables to the color map.
+@import "../node_modules/bulma/sass/utilities/derived-variables";
+$addColors: (
+  "blush":($blush, $blush-invert),
+  "lavender": ($lavender, $lavender-invert),
+  "dustyrose": ($dusty-rose, $dusty-rose-invert),
+  "smoke": ($smoke, $smoke-invert),
+  "cotton": ($cotton, $cotton-invert),
+  "powderblue": ($powder-blue, $powder-blue-invert),
+  "leaf": ($leaf, $leaf-invert),
+  "sunshine": ($sunshine, $sunshine-invert),
+  "crimsonsky": ($crimson-sky, $crimson-sky-invert),
+  "indigo": ($indigo, $indigo-invert),
+  "aqua": ($aqua, $aqua-invert)
+);
+$colors: map-merge($colors, $addColors);
+
+// 6. Import the rest of Bulma
+@import "../node_modules/bulma/bulma";
+
+//used Canva color schemes for the inspiration 
+//https://www.canva.com/learn/website-color-schemes/
