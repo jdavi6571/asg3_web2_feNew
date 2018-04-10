@@ -19963,14 +19963,7 @@ label.panel-block:hover {
     padding:5px 10px;
     color:#c92c43
 }
-.container{
-    color:#cac8ee;
-    display:flex;
-    flex-direction:row;
-    align-items:flex-start;
-    height:100%;
-    width:100%
-}
+
 #side-bar{
     box-sizing:border-box;
     width:33.75%;
