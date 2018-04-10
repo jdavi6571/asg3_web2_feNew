@@ -43,17 +43,17 @@ changeTabs(){ this.setState({ changeTab: !this.state.changeTab }); }
                   
                    let portfolio = [];
 
-            this.state.portfolioDetails.map( index => {
-                response.data.map( ind => {
-                    if ( index.symbol === ind.symbol){
-                        let stockInfo = {name: ind.name,
-                                         symbol: ind.symbol,
-                                         owned: ind.owned}
-                        
-                        portfolio.push(stockInfo);                 
-                    }
-                });
+        this.state.portfolioDetails.forEach(function (arrayItem) {
+            response.data.forEach(function (arrayItem2) {
+                if (arrayItem.symbol === arrayItem2.symbol) {
+                    let stockInfo = {name: arrayItem2.name,
+                                     symbol: arrayItem2.symbol,
+                                     owned: arrayItem.owned}
+                    
+                    portfolio.push(stockInfo);
+                }
             });
+        });
             this.setState({ portfolioDetails: portfolio });
             
             })
@@ -71,6 +71,7 @@ changeTabs(){ this.setState({ changeTab: !this.state.changeTab }); }
         
   
 render() {
+
     var displayTabs;                
             if (this.state.changeTab ? displayTabs =  
                 <PortfolioSummarySubView 
@@ -80,13 +81,14 @@ render() {
                />
        
              :displayTabs =
-             
+      
                <PortfolioListSubView
                 id={this.state.id}
                 stocks={this.state.stocks} 
                 stocksOwned = {this.state.stocksOwned}
                 companies = {this.state.companies}
                 portfolioDetails = { this.state.portfolioDetails } 
+                
                 />  
 
         

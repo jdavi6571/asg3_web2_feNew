@@ -82,8 +82,8 @@ return (
   </div>
   <div class="tile is-parent">
     <article class="tile is-child box notification is-aqua">
-      <p class="title">Current $ Worth</p>
-      <p class="subtitle is-pulled-right">Subtitle</p>
+      <p class="title">Current Worth</p>
+      <p class="subtitle is-pulled-right">$253,542.00</p>
     </article>
   </div>
   </div>

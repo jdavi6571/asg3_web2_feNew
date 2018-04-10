@@ -2,7 +2,7 @@ import React, { Component } from 'react';
  // eslint-disable-next-line
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-import HeaderApp from './components/HeaderApp.js';
+import HeaderMenu from './components/HeaderMenu.js';
 import AboutUs from './containers/AboutUs.js';
 import Home from './containers/Home.js';
 import BrowseCompanies from './containers/BrowseCompanies.js';
@@ -30,9 +30,6 @@ const PrivateRoute = ({ component: Component, authed,...rest }) => (
       } />
   )} />
 );
-const HeaderVisible = (props) => (
-     props.authed === true ? <HeaderApp/> : <div></div>
-);
 
 class App extends Component {
   constructor(props) {
@@ -57,7 +54,7 @@ class App extends Component {
   render() {
     return (
           <div>
-            <HeaderVisible authed={this.state.authed}/>
+            {this.state.authed === true ? <HeaderMenu  authAdjust={this.adjustAuthStatus.bind(this)}/> : <div></div>}
             <main >
               <PrivateRoute path="/" exact component={Home} authed={this.state.authed}/>
               <Route path="/login"  render={(routeProps) => (

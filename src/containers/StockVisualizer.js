@@ -4,17 +4,35 @@ import '../App.css';
 import {LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend}  from 'recharts';
 import BreadCrumb from '../components/BreadCrumb.js';
 
+const MonthItem = (props) => {
+    return (
+        <a className="dropdown-item" value={props.month_value} onClick={() => {props.setActiveMonth(props.month,props.month_value)}}>
+            {props.month}
+        </a>
+    );
+};
+
+
 class StockVisualizer extends Component {
  constructor(props) {
    super(props);
     this.state = {
+      isActive: "false",
       currentStockSymbol: 1,
+        currentActiveMonth:"Select a month",
+        currentMonthValue: 0, 
        stocks:[]
         };
+    this.hideDropDown = this.hideDropDown.bind(this);
     }
     
+    hideDropDown(){
+        this.setState({  isActive: !this.state.isActive}); 
+    }
+        
+    
 componentDidMount() {
- axios.get('/stocks.json')
+    axios.get('https://web3asg2be.herokuapp.com/prices/stocks/:symbol/:month')
       .then(response => { this.setState({stocks: response.data});})
       .catch(function(error){ alert('Error with api call... error' + error); });
     }
@@ -24,6 +42,13 @@ handleSelect(key) { this.setState ({currentStockSymbol: key}) }
 
     
 render() {
+ var userId = parseInt(JSON.parse(localStorage.getItem('user')).id, 10);  
+ var months = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"];
+                
+var monthItems = months.map((month,i) => {
+    return <MonthItem month={month} month_value={i+1} setActiveMonth={this.changeCurrentMonth}/> ;
+ });
 const data = [
       {name: '1', stock1: 4000, stock2: 2400, stock3: 2400},
       {name: '2', stock1: 3000, stock2: 1398, stock3: 2210},
@@ -53,7 +78,7 @@ const data = [
      <div class="container">
    <div class="columns is-narrow-mobile is-multiline is-centered">
    <div class="column is-3">
-                    <div class="dropdown">
+                <div className={this.state.isActive ? 'dropdown' : 'dropdown is-active'}>
                     <div class="dropdown-trigger">
                  <button class="button  is-lavender is-centered is-narrow-mobile is-large is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu3">
                   <span>Select a month</span>
@@ -76,7 +101,7 @@ const data = [
 </div>
 </div>
   <div class="column  is-2 ">
-                    <div class="dropdown">
+                        <div className={this.state.isActive ? 'dropdown' : 'dropdown is-active'}>
                     <div class="dropdown-trigger">
                  <button class="button  is-centered is-narrow-mobile is-crimsonsky is-large is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu3">
                   <span>Select a stock</span>
@@ -99,7 +124,7 @@ const data = [
 </div>
 </div>
   <div class="column  is-2 ">
-                   <div class="dropdown">
+                <div className={this.state.isActive ? 'dropdown' : 'dropdown is-active'}>
                     <div class="dropdown-trigger">
                  <button class="button  is-sunshine is-centered is-narrow-mobile is-large is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu3">
                   <span>Select a stock</span>
@@ -122,7 +147,7 @@ const data = [
 </div>
   </div>
     <div class="column  is-2">
-                   <div class="dropdown">
+                  <div className={this.state.isActive ? 'dropdown' : 'dropdown is-active'}>
                     <div class="dropdown-trigger">
                  <button class="button  is-powderblue  is-centered is-narrow-mobile is-large is-fullwidth" aria-haspopup="true" aria-controls="dropdown-menu3">
                   <span>Select a stock</span>
