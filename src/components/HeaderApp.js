@@ -8,7 +8,7 @@ const HeaderApp = function (props) {
     return (
         <header>
    
-        <HeaderMenu />
+        <HeaderMenu/>
   
  
         </header>

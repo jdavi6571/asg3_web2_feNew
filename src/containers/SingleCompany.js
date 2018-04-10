@@ -11,12 +11,11 @@ constructor(props) {
       this.state = {
         id: this.props.match.params.id,
         changeTab: "true",
-        user: [],
-        userPortfolio: [],
         stocks: [],
-        address: [],
+        averagePerMonth: [],
         company: [],
-        geo: []
+        stockSymbol: "",
+
       };
     this.changeTabs = this.changeTabs.bind(this);
     }
@@ -24,55 +23,38 @@ constructor(props) {
 changeTabs(){ this.setState({ changeTab: !this.state.changeTab }); }
       
 componentWillMount() {
-    axios.get("/userStockPortfolio.json")
-        .then(response => { this.setState({ userPortfolio: response.data }); })
-        .catch(function (error) { alert('Error with api call ... error=' + error); });
-
- let symbol = this.props.match.params.symbol;
-    var stocks= require("../stocks.json").find(function(element) {return element.symbol === symbol; })
-         this.setState({stockSymbol:stocks});
-    }
-    
-    
-componentDidMount() {
-    axios.get("https://jsonplaceholder.typicode.com/users/" + this.state.id)
-        .then(response => {
-        this.setState({
-            user: response.data,
-            address: response.data.address,
-            company: response.data.company,
-            geo: response.data.address.geo }); })
+     let symbol = this.props.match.params.symbol;
+    axios.get("https://web3asg2be.herokuapp.com/companies/stocks/" + symbol)
+        .then(response => { this.setState({ company: response.data }); })
         .catch(function (error) { alert('Error with api call ... error=' + error); });
         
-    axios.get("/stocks.json")
-        .then(response => { this.setState({ stocks: response.data }); })
-        .catch(function (error) { alert('Error with api call ... error=' + error); }); }
+
+    axios.get("https://web3asg2be.herokuapp.com/prices/stocks/average/close/" + symbol)
+        .then(response => { this.setState({ averagePerMonth: response.data }); })
+        .catch(function (error) { alert('Error with api call ... error=' + error); });
+        
+        
+
+    var stocks= require("../stocks.json").find(function(element) {return element.symbol === symbol; })
+         this.setState({stocks:stocks});
+    }
+    
+
   
 render() {
     var displayTabs;                
             if (this.state.changeTab ? displayTabs =  
             <CompanySubViewSummary 
-                id={this.state.user.id}
-                name={this.state.user.name}
-                username={this.state.user.username}
-                email={this.state.user.email}
-                phone={this.state.user.phone}
-                website={this.state.user.website}
-                street={this.state.address.street}
-                suite={this.state.address.suite}
-                city={this.state.address.city}
-                zipcode={this.state.address.city}
-                lat={this.state.geo.lat}
-                lng={this.state.geo.lng}
-                companyName={this.state.company.name}
-                catchPhrase={this.state.company.catchPhrase}
-                bs={this.state.company.bs} /> 
+                
+                id={this.state.id}
+                company={this.state.company}
+                averagePerMonth={this.state.averagePerMonth} /> 
              :displayTabs =
              <CompanyListSubView 
-                id={this.state.id}
-                name={this.state.user.name}
-                userPortfolio={this.state.userPortfolio}
-                stocks={this.state.stocks} /> ) 
+               id={this.state.id}
+                company={this.state.company}
+                averagePerMonth={this.state.averagePerMonth}
+                stockSymbol={this.state.stocks.symbol} />  ) 
 return (
 <div>
 
@@ -81,8 +63,8 @@ return (
    <section class="hero is-cotton is-bold">
   <div class="hero-body"> 
     <div class="container is-narrow-mobile">
-     <img alt="Stock" id= "stockImage" src={"/logos/" + this.state.stockSymbol.symbol +".svg"} /> 
-      <h1 class="title"> {this.state.stockSymbol.name} </h1>
+     <img alt="Stock" id= "stockImage" src={"/logos/" + this.state.stocks.symbol +".svg"} /> 
+      <h1 class="title"> {this.state.stocks.name} </h1>
   </div>
   </div>
 </section>

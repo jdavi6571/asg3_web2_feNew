@@ -10,13 +10,13 @@ class BrowseCompanies extends Component {
    super(props);
     this.state = {
       currentStockSymbol: 1,
-       stocks:[]
+       companies:[]
         };
     }
     
 componentDidMount() {
- axios.get('/stocks.json')
-      .then(response => { this.setState({stocks: response.data});})
+ axios.get('https://web3asg2be.herokuapp.com/companies/all')
+      .then(response => { this.setState({companies: response.data});})
       .catch(function(error){ alert('Error with api call... error' + error); });
     }
     
@@ -44,7 +44,7 @@ render() {// eslint-disable-next-line
 <br/>
     
      <div class="columns is-multiline is-centered is-narrow-mobile">
-       {this.state.stocks.map( (stock,ind) => {
+       {this.state.companies.map( (stock,ind) => {
               let activeClass = "";
                 if (stock.symbol === currentSymbol) activeClass = "is-active";
                     return (

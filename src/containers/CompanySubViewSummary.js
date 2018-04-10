@@ -8,6 +8,10 @@ super(props);
 this.state = {
   hideFirstBlock: 'block',
   hideSecondBlock: 'block',
+           symbol: "",
+           sector: "",
+           subIndustry: "",
+           address: "",
 }; 
 this.handleFirstItemChange = this.handleFirstItemChange.bind(this);
 }
@@ -19,30 +23,41 @@ handleFirstItemChange() {
     
     
 render() {
-    
-    const data = [
-      {month: 'January', averagePrice: 4000},
-      {month: 'Febraury', averagePrice: 3000},
-      {month: 'March', averagePrice: 2000},
-      {month: 'April', averagePrice: 2780},
-      {month: 'May', averagePrice: 1890},
-      {month: 'June', averagePrice: 2390},
-      {month: 'July', averagePrice: 2344},
-      {month: 'August', averagePrice: 1234},
-      {month: 'September', averagePrice: 5465},
-      {month: 'October', averagePrice: 2041},
-      {month: 'November', averagePrice: 1500},
-      {month: 'December', averagePrice: 2396},
-                     
-];
+    const data =  [];
+    var months = ["Jan", "Feb", "Mar", "Apr", "May", "June",
+                "July", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    this.props.averagePerMonth.map( (stock) => {
+      
+        let tempName = months[stock._id-1]; 
+        let tempValue = stock.avgClose;
+        var tempObj = {
+          month: tempName,
+          averagePrice: tempValue
+        };
+        data.push(tempObj);
+      });
+      
+   this.props.company.map( (stock) => {
+       this.state = {
+           symbol: stock.symbol,
+           sector: stock.sector,
+           subIndustry: stock.subindustry,
+           address: stock.address
+       };
+      });
+
         
 return (
-     <section>
-   
-     
- 
+        
 
+        
+         
+     <section>
+    
+    
     <div className="columns is-narrow">
+    
+      
       <section className="column is-4">
           <article class="container is-fluid">
              <article className="message is-lavender">
@@ -52,10 +67,12 @@ return (
   <div  className="message-body" style={{display: this.state.hideFirstBlock}}>
      <div className="message is-success">
         <div className="message-body">
-           <p><strong>Symbol: </strong></p>
-               <p><strong>Sector: </strong></p>
-                <p> <strong>Sub-Industry: </strong>  </p>
-                 <p> <strong>Address: </strong> </p>
+
+           <p><strong>Symbol: {this.state.symbol } </strong></p>
+               <p><strong>Sector: </strong> {this.state.sector } </p>
+                <p> <strong>Sub-Industry: </strong>  {this.state.subIndustry }  </p>
+                 <p> <strong>Address: </strong> {this.state.address}  </p>
+
                   </div>
                  </div>
               </div>

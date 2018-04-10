@@ -1,41 +1,49 @@
 import React, { Component } from 'react';
-// eslint-disable-next-line 
-import { Link } from 'react-router-dom';
-// eslint-disable-next-line 
-import BreadCrumb from '../components/BreadCrumb.js';
-import axios from "axios";
-import '../App.css';
+import { withRouter, Redirect } from 'react-router-dom'
 
-class Login extends Component {
-    //validation script structure from: https://serverless-stack.com/chapters/create-a-login-page.html
+import axios from 'axios'
+
+var apiBaseUrl = "https://web3asg2be.herokuapp.com/users/";
+
+class Login extends React.Component {
+      //validation script structure from: https://serverless-stack.com/chapters/create-a-login-page.html
     constructor(props) {
         super(props);
             this.state = {
                 email: "",
-                password: ""
+                password: "",
+                redirectToReferrer: false
             };
+            this.handleSubmit = this.handleSubmit.bind(this);
+            this.handleChange = this.handleChange.bind(this);
+            this.validateForm = this.validateForm.bind(this);
     }
     
     validateForm() {
         return this.state.email.length > 0 && this.state.password.length > 0;
     }
     
-    handleChange = event => {
+    handleChange(event) {
         this.setState({
                 [event.target.id]: event.target.value
             });
     }
     
-    handleSubmit = event => {
+    handleSubmit(event) {
         event.preventDefault();
         //login script from: https://medium.com/technoetics/create-basic-login-forms-using-create-react-app-module-in-reactjs-511b9790dede
-         var apiBaseUrl = "https://web3asg2be.herokuapp.com/users/";
         axios.post(apiBaseUrl + this.state.email + '/' + this.state.password)
         .then(response => {
             if(response.data.code === 200){
                 console.log("Login successfull");
                 try {
-                    this.props.history.push('/');
+                  this.setState(() => ({
+                    redirectToReferrer: true
+                  }))
+                    var user = {"id":response.data.id,first_name:response.data.first_name,last_name:response.data.last_name};
+                    this.props.authAdjust(true);
+                    localStorage.setItem('user',JSON.stringify(user));
+                    this.props.history.push('/home');
                 }
                 catch(err){
                     console.log("error" + err);
@@ -51,6 +59,13 @@ class Login extends Component {
     
     render() {
         //template form from: https://dansup.github.io/bulma-templates/templates/login.html
+        const {from} = this.props.location.state || {from: {pathname: '/'}};
+        
+        if (this.props.authed === true) {
+          return (
+            <Redirect to={from} />
+          );
+        }
         return (
         <section className="hero is-success is-fullheight">
                 <div className="hero-body">
@@ -96,4 +111,4 @@ class Login extends Component {
     }
 }
 
-export default Login;
+export default withRouter(Login);
