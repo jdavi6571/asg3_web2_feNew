@@ -10,6 +10,7 @@ import SingleCompany from './containers/SingleCompany.js';
 import BrowsePortfolio from './containers/BrowsePortfolio.js';
 import StockVisualizer from './containers/StockVisualizer.js';
 import Login from './containers/Login.js';
+import Layout from './componentChat/Layout';
 import axios from "axios";
  // eslint-disable-next-line
 import ChatInterface from './containers/ChatInterface.js';
@@ -65,6 +66,7 @@ class App extends Component {
               <PrivateRoute path = "/company/:symbol" exact component={SingleCompany} authed={this.state.authed}/>
               <PrivateRoute path ="/portfolio" exact component={BrowsePortfolio} authed={this.state.authed}/>
               <PrivateRoute path="/stocks" exact component={StockVisualizer} authed={this.state.authed}/>
+              <PrivateRoute path="/Chat" exact component={Layout} authed={this.state.authed}/>
             </main>
           </div>
     );

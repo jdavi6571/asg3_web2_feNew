@@ -4,16 +4,17 @@ import { USER_CONNECTED, LOGOUT } from '../Events'
 import LoginForm from './LoginForm'
 import ChatContainer from './chats/ChatContainer'
 
+//chat engine from: https://www.youtube.com/watch?v=84GXJANOYFw
 const socketUrl = 
-      "https://chat-sever-socket.herokuapp.com/"
+      "https://web3-asg2-chatengine.herokuapp.com/";
 export default class Layout extends Component {
 
 	constructor(props) {
 	  super(props);
-
+	  var l_user = JSON.parse(localStorage.getItem('user'));
 	  this.state = {
 	  	socket:null,
-	  	user:null
+	  	user: l_user ? l_user.first_name : null
 	  };
 	}
 

@@ -10,6 +10,7 @@ class HeaderMenu extends Component {
         this.hideNavbar = this.hideNavbar.bind(this);
         this.getUserName = this.getUserName.bind(this);
         this.logout = this.logout.bind(this);
+        this.openChat = this.openChat.bind(this);
     }
     
 hideNavbar(){
@@ -29,6 +30,10 @@ logout(e) {
     this.props.authAdjust(false);
     localStorage.removeItem('user');
     this.props.history.push('/login');
+}
+
+openChat(e) {
+    this.props.history.push('/chat');
 }
 
  render(){
@@ -54,14 +59,15 @@ logout(e) {
                     <NavLink onClick={this.hideNavbar} className="navbar-item is-hoverable " to={ {pathname: "/companies"}}>Companies</NavLink>
                     <NavLink onClick={this.hideNavbar} className="navbar-item is-hoverable " to={ {pathname: "/stocks"}}>Stocks</NavLink>
                     <NavLink onClick={this.hideNavbar} className="navbar-item is-hoverable " to={ {pathname: "/aboutus"}}>About Us</NavLink>
+                    <NavLink onClick={this.hideNavbar} className="navbar-item is-hoverable " to={ {pathname: "/chat"}}>Chat</NavLink>
                 </div>
             </div>
             <p className="field">
-                <a className="button is-indigo">
-                    <span className="icon is-large">
-                        <i className="fas fa-bell"></i>
+                <button className="button is-indigo">
+                    <span className="icon is-large" onClick={this.openChat}>
+                        <i className="fas fa-envelope"></i>
                     </span>
-                </a>
+                </button>
                 <button className="button is-indigo"  onClick={this.logout}>
                     <span className="icon is-large">
                         <i className="fas fa-power-off"></i>
